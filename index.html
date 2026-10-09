@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buenas Noches ✨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #1b0f2e 0%, #0d0614 100%);
+            color: #e2e8f0;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .font-serif-custom {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Twinkling background stars */
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: var(--opacity);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { transform: scale(1); opacity: var(--opacity); }
+            50% { transform: scale(1.3); opacity: 0.9; }
+        }
+
+        /* Shooting stars */
+        .shooting-star {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(244,114,182,0));
+            border-radius: 9999px;
+            animation: shoot 3.5s infinite ease-in;
+            opacity: 0;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-550px) translateY(550px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        /* Glassmorphism panel with purple border and entrance animation */
+        .liquid-glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(168, 85, 247, 0.4); /* Purple border requested */
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3), 0 0 20px rgba(168, 85, 247, 0.15);
+            animation: panelEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes panelEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: #f472b6;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .moon-frame {
+            box-shadow: 0 0 25px rgba(244, 114, 182, 0.2);
+            transition: transform 0.5s ease;
+        }
+        .moon-frame:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes breathing {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .breathing-card {
+            animation: breathing 6s infinite ease-in-out;
+        }
+
+        /* Internal cascade items (natural flowers and pink star dots) */
+        .card-cascade-item {
+            position: absolute;
+            animation: cardCascade var(--duration) infinite linear;
+            top: -20px;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes cardCascade {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(380px) translateX(25px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        #custom-modal {
+            transition: opacity 0.3s ease;
+        }
+
+        #modal-box {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(13, 6, 20, 0.3);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(244, 114, 182, 0.3);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="relative flex flex-col items-center justify-center min-h-screen py-10 px-4 selection:bg-pink-500/30 selection:text-white">
+
+    <div id="stars-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <main class="z-10 w-full max-w-sm liquid-glass-card breathing-card rounded-3xl p-8 flex flex-col items-center text-center relative my-auto overflow-hidden">
+        
+        <div id="card-cascade-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+        <div class="relative mb-6 z-10">
+            <div class="absolute -inset-1.5 bg-gradient-to-tr from-sky-400/50 to-sky-200/30 rounded-2xl blur-md animate-pulse"></div>
+            <div class="moon-frame relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-sky-300 bg-purple-950 flex items-center justify-center shadow-inner">
+                <img src="https://img.clubimagenes.com/ci/buenas-noches/buenas-noches_004.jpg" 
+                     alt="Buenas noches" 
+                     class="w-full h-full object-cover"
+                     onerror="this.src='https://placehold.co/100x100/1b0f2e/f472b6?text=🌙'">
+            </div>
+        </div>
+
+        <h1 id="typewriter-title" class="font-serif-custom text-4xl md:text-5xl font-normal text-pink-100/90 mb-3 tracking-wide min-h-[3.5rem] flex items-center justify-center z-10">
+            <span id="title-text"></span><span class="typewriter-cursor h-9 ml-0.5"></span>
+        </h1>
+
+        <div class="w-10 h-px bg-pink-400/30 mb-6 z-10"></div>
+
+        <div class="text-sm md:text-base text-purple-100/90 leading-relaxed mb-4 px-2 space-y-2 font-medium z-10">
+            <p class="font-semibold text-lg text-pink-200">"El día se va apagando,</p>
+            <p class="font-semibold text-lg text-pink-200">las estrellas brillan más,</p>
+            <p class="font-semibold text-lg">descansa tu mente un poco,</p>
+            <p class="font-semibold text-lg">que la paz te cubra ya." 🌙✨</p>
+        </div>
+
+    </main>
+
+    <script>
+        // Typewriter Effect for Title
+        const textToType = "Buenas noches";
+        let charIndex = 0;
+        const titleSpan = document.getElementById('title-text');
+
+        function typeWriter() {
+            if (charIndex < textToType.length) {
+                titleSpan.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 120);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(typeWriter, 400);
+        });
+
+        // Generate Starry Sky
+        const starsContainer = document.getElementById('stars-container');
+        const starCount = 60;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.setProperty('--duration', `${Math.random() * 4 + 2}s`);
+            star.style.setProperty('--opacity', Math.random() * 0.6 + 0.2);
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            starsContainer.appendChild(star);
+        }
+
+        // Generate Shooting Stars
+        function createShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.top = `${Math.random() * 50}%`;
+            shootingStar.style.left = `${Math.random() * 60 + 40}%`;
+            shootingStar.style.width = `${Math.random() * 80 + 50}px`;
+            starsContainer.appendChild(shootingStar);
+
+            setTimeout(() => {
+                shootingStar.remove();
+            }, 3500);
+        }
+
+        setInterval(createShootingStar, 5000);
+
+        // Generate Natural Flowers (🌸) and Pink Star Dots (•) with increased frequency
+        const cardCascadeContainer = document.getElementById('card-cascade-container');
+        const cascadeSymbols = ['🌸', '•'];
+
+        function createCardCascadeItem() {
+            const item = document.createElement('div');
+            item.className = 'card-cascade-item';
+            const symbol = cascadeSymbols[Math.floor(Math.random() * cascadeSymbols.length)];
+            item.innerHTML = symbol;
+            item.style.left = `${Math.random() * 90 + 5}%`;
+            
+            if (symbol === '•') {
+                item.style.fontSize = `${Math.random() * 8 + 8}px`;
+                item.style.color = 'rgba(244, 114, 182, 0.8)';
+                item.style.textShadow = '0 0 6px rgba(244, 114, 182, 0.9)';
+            } else {
+                item.style.fontSize = `${Math.random() * 14 + 14}px`;
+                // Natural colors for flowers without custom color filter
+            }
+
+            const duration = Math.random() * 2 + 3.0;
+            item.style.setProperty('--duration', `${duration}s`);
+            cardCascadeContainer.appendChild(item);
+
+            setTimeout(() => {
+                item.remove();
+            }, duration * 1000);
+        }
+
+        // Increased frequency interval (800ms)
+        setInterval(createCardCascadeItem, 800);
+    </script>
+</body>
+</html>
